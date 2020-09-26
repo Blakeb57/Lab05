@@ -3,64 +3,78 @@
 	John Dolan
    A little class that holds a dynamic array of numbers
 ***************************************/
-
+#include <iostream>
+#include <string>
+#include <fstream>
 #include<iostream>
+#ifndef NUMBERS_H
+#define NUMBERS_H
 
 size_t byte_count = 0;
 class Numbers{
     public:
-	Numbers();
-// You will need to add a destructor in here
-	void add(unsigned long item);
-	void resize();
-	void remove_last();
-	void display(std::ostream& outs);
-	unsigned long* reveal_address()const;
-	//This is added after first three questions answered:
-	//void operator = (const Numbers& other);
-	// This is used in Part 2 and would normally not be in a container	unsigned long * reveal_address()const;
-	//This is a function that you add in Part 2
-	//~Numbers();
+		Numbers();
+		// You will need to add a destructor in here
+		void add(unsigned long item);
+		void resize();
+		void remove_last();
+		void display(std::ostream& outs);
+		unsigned long* reveal_address()const;
+		//This is added after first three questions answered:
+		//void operator = (const Numbers& other);
+		// This is used in Part 2 and would normally not be in a container	unsigned long * reveal_address()const;
+		//This is a function that you add in Part 2
+		//~Numbers();
     private: 
-	unsigned long * data;
-	std::size_t used;
-	std::size_t capacity;
+		unsigned long * data;
+		std::size_t used;
+		std::size_t capacity;
 };
 
-Numbers::Numbers(){
+Numbers::Numbers()
+{
 	data = new unsigned long[5];
 	used = 0;
 	capacity = 5;
 	byte_count +=5*sizeof(unsigned long);
 }
 
-void Numbers::add(unsigned long item){
+void Numbers::add(unsigned long item)
+{
 	if(used == capacity)
+	{
 	   resize();
+	}
 	data[used] = item;
 	used++;
 }
 
-void Numbers::resize(){
+void Numbers::resize()
+{
 	unsigned long *tmp;
 	tmp = new unsigned long[capacity+5];
 	std::copy(data, data+used, tmp);
-	delete [] data;
+	delete[] data;
 	capacity += 5;
-	byte_count +=5*sizeof(unsigned long);
+	byte_count += 5*sizeof(unsigned long);
 	data = tmp;
 }
 
-void Numbers::remove_last(){
+void Numbers::remove_last()
+{
 	used--;
 }
 
-void Numbers::display(std::ostream& outs){
+void Numbers::display(std::ostream& outs)
+{
 	for(std::size_t i = 0; i < used; ++i)
-	    outs<<data[i]<<' ';
+	{
+	    outs << data[i] << ' ';
+	}
 }
 
-unsigned long *Numbers::reveal_address()const{
+unsigned long *Numbers::reveal_address()const
+{
 	return data;
 }
 // You will need to write the implementation of this overloaded operator
