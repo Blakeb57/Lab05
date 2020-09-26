@@ -7,8 +7,8 @@
 #include <string>
 #include <fstream>
 #include<iostream>
-#ifndef NUMBERS_H
-#define NUMBERS_H
+//#ifndef NUMBERS_H
+//#define NUMBERS_H
 
 size_t byte_count = 0;
 class Numbers{
@@ -36,7 +36,7 @@ Numbers::Numbers()
 	data = new unsigned long[5];
 	used = 0;
 	capacity = 5;
-	byte_count +=5*sizeof(unsigned long);
+	byte_count += 5*sizeof(unsigned long);
 }
 
 void Numbers::add(unsigned long item)
