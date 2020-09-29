@@ -3,6 +3,7 @@
 	John Dolan
    A little class that holds a dynamic array of numbers
 ***************************************/
+#include<ctime>
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -14,17 +15,17 @@ size_t byte_count = 0;
 class Numbers{
     public:
 		Numbers();
+		// Numbers(const Numbers &obj);
 		// You will need to add a destructor in here
 		void add(unsigned long item);
 		void resize();
 		void remove_last();
 		void display(std::ostream& outs);
 		unsigned long* reveal_address()const;
-		//This is added after first three questions answered:
-		//void operator = (const Numbers& other);
+		void operator = (const Numbers& other);
 		// This is used in Part 2 and would normally not be in a container	unsigned long * reveal_address()const;
 		//This is a function that you add in Part 2
-		//~Numbers();
+		~Numbers();
     private: 
 		unsigned long * data;
 		std::size_t used;
@@ -38,6 +39,12 @@ Numbers::Numbers()
 	capacity = 5;
 	byte_count += 5*sizeof(unsigned long);
 }
+
+// Numbers::Numbers(const Numbers &Obj)
+// {
+// 	tmp 
+// }
+
 
 void Numbers::add(unsigned long item)
 {
@@ -54,7 +61,7 @@ void Numbers::resize()
 	unsigned long *tmp;
 	tmp = new unsigned long[capacity+5];
 	std::copy(data, data+used, tmp);
-	delete[] data;
+	delete [] data;
 	capacity += 5;
 	byte_count += 5*sizeof(unsigned long);
 	data = tmp;
@@ -77,9 +84,20 @@ unsigned long *Numbers::reveal_address()const
 {
 	return data;
 }
-// You will need to write the implementation of this overloaded operator
-/*
-void Numbers::operator = (const Numbers& other){
-	
+
+
+void Numbers::operator = (const Numbers& other)
+{
+	if(data != other.reveal_address()) {
+		delete [] data;
+		used = other.used;
+		capacity = other.capacity;
+		std::copy(other.reveal_address(), other.reveal_address()+other.used, data);
+	}
 }
-*/
+
+Numbers::~Numbers()
+{
+	delete [] data;
+	byte_count = byte_count - capacity*sizeof(unsigned long);
+}

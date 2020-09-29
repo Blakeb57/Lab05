@@ -17,56 +17,59 @@ using namespace std;
 
 int main()
 {
-     Numbers N1, N2;
+    Numbers N1, N2;
      
 	for(size_t i = 2; i < 16; i +=2)
 	{
 		N1.add(i);
 	}
 
-	N1.display(cout);
+	//N1.display(cout);
 
 		cout << endl;
-
+		N1.display(cout);
 		N2 = N1;
-
-		for(int i = 0; i < 4; ++i)
+		for(int i = 0; i < 5; ++i)
 		{
 			N2.remove_last();
 		}
-
+		
 		for(size_t i = 5; i < 20; i += 5)
 		{
 			N2.add(i);
 		}
-		N1.display(cout);
+		cout << endl;
+		N2.display(cout);
+		cout << endl;
 
-	unsigned long start, stop, running;
+		unsigned long start, stop, running;
 
 		start = time(NULL);
 
 
-// This part is added after question 6
+	// This part is added after question 6
 
-/*    unsigned long item = 0;
+   unsigned long item = 0;
     
-     try{
+    try{
 
-	while(item<5){ // Five containers will be created
+		while(item<5)
+		{ // Five containers will be created
 
-	    Numbers N3;
+	    	Numbers N3;
 
-	    for(int i = 0; i < 100; i++){
+	    	for(int i = 0; i < 100; i++)
+			{
 
-		N3.add(item);
-	    }
-	++item;
-	cout<<N3.reveal_address()<<endl;
-	}
+				N3.add(item);
+	    	}
+			++item;
+			cout<<N3.reveal_address()<<endl;
+		}
 
-     }
+    }
 
-catch(bad_alloc){  // this probably won't be needed
+	catch(bad_alloc){  // this probably won't be needed
 
 	cout<<"Memory failure after adding " <<item<<endl;
 
@@ -77,7 +80,7 @@ stop = time(NULL);
 running = (stop - start)/60;
 
 cout<<endl<<"Running took "<<running<<" minutes.\n";
-*/
+
 cout<<"Total bytes allocated = "<<byte_count<<endl;
 
 
